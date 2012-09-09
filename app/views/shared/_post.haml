@@ -1,0 +1,8 @@
+%h3= a_post.title
+- if !a_post.description.nil?
+  %p.Text
+    = a_post.description
+    \...
+%i= Time.at(a_post.path_mtime).asctime
+&nbsp;
+%a{:href => post_path(a_post.year, a_post.title,'')} more&gt;

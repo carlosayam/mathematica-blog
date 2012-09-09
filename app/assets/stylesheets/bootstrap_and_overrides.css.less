@@ -1,0 +1,86 @@
+@import "twitter/bootstrap/bootstrap";
+body { 
+	padding-top: 50px;
+}
+
+@import "twitter/bootstrap/responsive";
+
+// Set the correct sprite paths
+@iconSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings.png');
+@iconWhiteSpritePath: asset-path('twitter/bootstrap/glyphicons-halflings-white.png');
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// Note: If you use asset_path() here, your compiled boostrap_and_overrides.css will not 
+//       have the proper paths. So for now we use the absolute path.
+@fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
+@fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
+@fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
+@fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+
+// Font Awesome
+@import "fontawesome";
+
+// Your custom LESS stylesheets goes here
+//
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+//
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+//
+// Example:
+// @linkColor: #ff0000;
+
+// - specific mathematica styling
+
+// all with p
+// Title, Author, Institution, Date
+// AbstractSection, Abstract, AbstractMath, AbstractContinuation
+// Sectiom, Subsection, Equation
+// Item1Numbered, Item1, Item1Paragraph, Item2Numbered, Item2, Item2Paragraph, Item3Numbered, Item3, Item3Paragraph
+// Text, Figure, FigureCaption, Picture, PictureCaption
+// TableTitle, Table, TableNote
+// Theorem, TheoremContinuation, Corollary, LemaContinuation, Definition, DefinitionContinuation,
+//   Proposition, PropositionContinuation, Conjecture, ConjectureContinuation, Axiom, AxiomContinuation
+//   Rule, RuleContinuation, Example, ExampleContinuation, Remark, RemarkContinuation, Solution,
+//   SolutionContinuation, Proof, ProofContinuation, QED
+// AppendixSection, Appendix, AppendixEquation, Acknowledgements, AcknowledgementsSection,
+// EndnoteSection, Endnote, ReferenceSection, Reference
+
+
+p.Title, p.Section {
+  margin: 0;
+  font-family: @headingsFontFamily;
+  font-weight: @headingsFontWeight;
+  color: @headingsColor;
+  text-rendering: optimizelegibility; // Fix the character spacing for headings
+  small {
+    font-weight: normal;
+    color: @grayLight;
+  }
+}
+p.Title {
+  font-size: 30px;
+  line-height: @baseLineHeight * 2;
+  small {
+    font-size: 18px;
+  }
+}
+p.Section {
+  font-size: 24px;
+  line-height: @baseLineHeight * 2;
+  small {
+    font-size: 18px;
+  }
+}
+p.Subsection {
+  font-size: 18px;
+  line-height: @baseLineHeight * 1.5;
+  small {
+    font-size: 14px;
+  }
+}
+
+p.CellLabel, p.Input {
+  display:none;
+}

@@ -1,0 +1,12 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+TO_DO:
+1. Split repo in two: mathematica notebooks, web app
+2. Make web app public
+OR...
+1. Is it possible to migrate this to Octopress?
+
+3. Publish CDF
+3.a External CDF
+3.b Embedded CDF

@@ -1,0 +1,8 @@
+%h2
+  Posts tagged
+  %i= params[:text].downcase
+%p &nbsp;
+- post_per_tag.each do |a_post|
+  = render 'shared/post', :a_post => a_post
+%p &nbsp;
+

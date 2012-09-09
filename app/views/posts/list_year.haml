@@ -1,0 +1,9 @@
+%h2
+  = params[:year]
+  posts
+
+%ul
+  - posts_list_year.each do |a_post|
+    %li
+      %a{:href => post_path(a_post.year, a_post.title,'')} 
+        = a_post.title
