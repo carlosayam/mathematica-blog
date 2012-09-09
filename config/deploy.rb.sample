@@ -12,7 +12,7 @@ set :default_environment, {
 
 ssh_options[:forward_agent] = true
 set :application, "<APP-NAME>"
-set :repository,  "git@github.com:carlosayam/mathematica-blog.git"
+set :repository,  "git://github.com/carlosayam/mathematica-blog.git"
 
 set :scm, :git
 set :deploy_via, :remote_cache
