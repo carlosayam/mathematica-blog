@@ -20,6 +20,6 @@ test:
 
 production:
   adapter: sqlite3
-  database: <%= ENV['APACHE_BLOG_HOME'] %>/db/production.sqlite3
+  database: /home/dinamistics_blog/apps/dinamistics_blog/shared/db/production.sqlite3
   pool: 5
   timeout: 5000
