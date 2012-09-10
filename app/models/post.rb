@@ -88,12 +88,11 @@ class Post < ActiveRecord::Base
   end
 
   def self.process_cdf(str)
-    puts '>>>>>>>>>> PROCESS_CDF'
     pattern = /<p class="Output">\s*<a id="(([^.]+)\.cdf)"><\/a>\s*<([^>]+)>\s*<\/p>/mi
     replacement = <<-eos
       <script type="text/javascript">
       var cdf = cdfplugin();
-      cdf.setDefaultContent('<p class="Output"><\\3></p>');
+      cdf.setDefaultContent('<p class="Output"><\\3><br/><small>You need free <a href="http://www.wolfram.com/cdf-player/">CDF player</a> from Wolfram.</small></p>');
       cdf.embed('\\1', 431, 344);
     </script>
     eos

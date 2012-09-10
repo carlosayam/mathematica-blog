@@ -1,0 +1,2 @@
+module ReloadHelper
+end

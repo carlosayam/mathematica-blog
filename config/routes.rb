@@ -1,4 +1,6 @@
 MathematicaBlog::Application.routes.draw do
+  get "reload/reload"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -9,10 +11,14 @@ MathematicaBlog::Application.routes.draw do
   match 'post/:year/:title', :to => redirect {|env, params| "/post/#{params[:year]}/#{params[:title]}/" }
   match 'post/' => 'posts#index', :as => :post_index
   match 'year/:year' => 'posts#list_year', :as => :list_year
-  match 'reload/:year' => 'posts#reload'
+  match 'reload/:year' => 'reload#reload'
   match 'tag/:text' => 'tags#show', :as => :tag, :format => false
   match 'tags/' => 'tags#index', :as => :tag_index
   match 'tags', :to => redirect {|env, params| "/tags/"}
+  match 'about', :to => redirect {|env, params| 
+    post = Post.find(Rails.application.config.about_id)
+    post_path(post.year, post.title, '')
+    }
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase

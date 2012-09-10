@@ -37,4 +37,8 @@ MathematicaBlog::Application.configure do
 
   # location of posts folder
   config.posts_folder = "#{config.root}/spec/sample_data"
+  config.admin_user = 'admin'
+  config.admin_password = 'test'
+  config.about_id = 1
+
 end

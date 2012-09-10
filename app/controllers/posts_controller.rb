@@ -29,11 +29,6 @@ class PostsController < ApplicationController
     render 'index'
   end
 
-  def reload
-    Post.reload_year(params[:year])
-    redirect_to post_index_path
-  end
-
   def show
     # post = Post.find_by_year_and_title params[:year], params[:title]
     if post

@@ -69,5 +69,8 @@ MathematicaBlog::Application.configure do
 
   # location of posts folder
   config.posts_folder = config.deploy_config['posts_folder']
+  config.admin_user = config.deploy_config['admin_user']
+  config.admin_password = config.deploy_config['admin_password']
+  config.about_id = config.deploy_config['about_id']
 
 end

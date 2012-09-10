@@ -38,5 +38,8 @@ MathematicaBlog::Application.configure do
 
   # location of posts folder
   config.posts_folder = "#{config.root}/posts"
+  config.admin_user = 'admin'
+  config.admin_password = 'admin'
+  config.about_id = 1
 
 end
