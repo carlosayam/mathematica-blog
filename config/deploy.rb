@@ -41,3 +41,10 @@ namespace :deploy do
   end
 end
 
+namespace :blog do
+  desc "Updates post in web server using git"
+  task :update, :roles => :web do
+    run "cd #{current_path}; rake -T"
+  end
+end
+
