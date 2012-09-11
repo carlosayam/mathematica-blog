@@ -29,6 +29,15 @@ class PostsController < ApplicationController
     render 'index'
   end
 
+  def by_id
+    a_post = Post.find(params[:id])
+    if a_post
+      redirect_to post_path(a_post.year, a_post.title,'')
+    else
+      redirect_to post_index
+    end
+  end
+
   def show
     # post = Post.find_by_year_and_title params[:year], params[:title]
     if post

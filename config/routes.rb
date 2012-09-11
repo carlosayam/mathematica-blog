@@ -7,8 +7,8 @@ MathematicaBlog::Application.routes.draw do
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-  match 'post/:year/:title/(*file_path)' => 'posts#show', :as => :post, :format => false
-  match 'post/:year/:title', :to => redirect {|env, params| "/post/#{params[:year]}/#{params[:title]}/" }
+  match 'post/:year/:title', :to => redirect {|env, params| "/post/#{params[:year]}/#{params[:title]}/" }, :constraints => lambda {|r| !r.original_fullpath.end_with?('/')}
+  match 'post/:year/:title(/*file_path)' => 'posts#show', :as => :post, :format => false
   match 'post/' => 'posts#index', :as => :post_index
   match 'year/:year' => 'posts#list_year', :as => :list_year
   match 'reload/:year' => 'reload#reload'
@@ -17,8 +17,9 @@ MathematicaBlog::Application.routes.draw do
   match 'tags', :to => redirect {|env, params| "/tags/"}
   match 'about', :to => redirect {|env, params| 
     post = Post.find(Rails.application.config.about_id)
-    post_path(post.year, post.title, '')
+    "/post/#{post.year}/#{post.title}/"
     }
+  match 'np/:id' => 'posts#by_id', :as => :post_short, :format => false
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
