@@ -18,8 +18,9 @@ test:
   pool: 5
   timeout: 5000
 
+<% deploy_config = YAML.load File.new('/etc/mathematica-blog/config.yml') %>
 production:
   adapter: sqlite3
-  database: /home/dinamistics_blog/apps/dinamistics_blog/shared/db/production.sqlite3
+  database: <%= deploy_config['database'] %>
   pool: 5
   timeout: 5000
