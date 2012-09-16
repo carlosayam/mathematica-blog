@@ -41,5 +41,6 @@ MathematicaBlog::Application.configure do
   config.admin_user = 'admin'
   config.admin_password = 'admin'
   config.about_id = 1
+  config.disqus_shortname = '_disqus_'
 
 end

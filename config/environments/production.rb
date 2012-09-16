@@ -72,5 +72,6 @@ MathematicaBlog::Application.configure do
   config.admin_user = config.deploy_config['admin_user']
   config.admin_password = config.deploy_config['admin_password']
   config.about_id = config.deploy_config['about_id']
+  config.disqus_shortname = config.deploy_config['disqus_shortname']
 
 end

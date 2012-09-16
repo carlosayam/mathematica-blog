@@ -44,7 +44,7 @@ end
 namespace :blog do
   desc "Updates post in web server using git"
   task :update, :roles => :web do
-    run "cd #{current_path}; rake -T"
+    run "cd #{current_path}; rake blog:update"
   end
 end
 
