@@ -20,6 +20,7 @@ MathematicaBlog::Application.routes.draw do
     "/post/#{post.year}/#{post.title}/"
     }
   match 'np/:id' => 'posts#by_id', :as => :post_short, :format => false
+  match 'blog', :to => redirect {|env, params| "/post/"}
 
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
