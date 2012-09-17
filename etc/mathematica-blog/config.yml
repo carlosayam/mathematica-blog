@@ -1,0 +1,6 @@
+deploy_to: path/to/deploy/folder
+deploy_role: example.com
+deploy_user: example_user
+posts_folder: path/to/posts/folder
+disqus_shortname: disqus_example
+
