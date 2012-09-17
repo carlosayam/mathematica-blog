@@ -22,8 +22,9 @@
     / Placed at the end of the document so the pages load faster
     = javascript_include_tag "application"
 
-    %script{:type=>"text/javascript"}
-      :javascript
+    %script{:type=>'text/javascript'}
+      :plain
+        //<![CDATA[
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = '#{Rails.application.config.disqus_shortname}'; // required: replace example with your forum shortname
 
@@ -34,6 +35,7 @@
             s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
             (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
         }());
+        //]]>
 
   %body
     .navbar.navbar-fixed-top
