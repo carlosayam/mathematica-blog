@@ -6,4 +6,4 @@
 %i= Time.at(a_post.path_mtime).asctime
 &nbsp;
 %a{:href => post_path(a_post.year, a_post.title,'')} more&gt;
-%a{:href => post_path(a_post.year, a_post.title,'') + "#disqus_thread"} -
+%a{:href => post_short_url(a_post.id) + "#disqus_thread"} -
