@@ -32,26 +32,27 @@ class Post < ActiveRecord::Base
     year_dir = "#{Rails.application.config.posts_folder}/#{year}"
     return false unless File.directory? year_dir
     # set path_mtime to 0 for the year
-    minimum_mtime = nil
+    min_path_mtime = nil
     Find.find(year_dir) do |path|
        if File.extname(path) == '.yml'
           yaml = YAML.load File.new(path)
           html_file = File.join File.dirname(path), File.basename(path, '.yml')
-          # find post by path
-          # update if found (rescue on error), new if not
-          if FileTest.file? html_file
-            Post.process_html html_file
-            minimum_mtime ||=  File.mtime(html_file).to_i
-            post = Post.new :year => year, :title => yaml['title'], :path => html_file, :path_mtime => File.mtime(html_file),
-              :description => yaml['description']
-            post.save
+          min_path_mtime ||= File.mtime(html_file).to_i if File.file? html_file
+          a_post = Post.find_by_path(html_file)
+          if a_post
+            a_post.refresh_record
+          else
+            if FileTest.file? html_file
+              Post.process_html html_file
+              post = Post.new :year => year, :title => yaml['title'], :path => html_file, :path_mtime => File.mtime(html_file),
+                :description => yaml['description']
+              post.save
+            end
           end
        end
        next
     end
-    # delete all non-existing post for the year
-    puts ">> #{minimum_mtime}"
-    Post.where("year = ? AND path_mtime < ?", year, minimum_mtime).destroy_all 
+    Post.where("year = ? AND path_mtime < ?", year, min_path_mtime).destroy_all 
     return true
   end
 
@@ -59,8 +60,6 @@ class Post < ActiveRecord::Base
     return path if !a_path || a_path.empty?
     return File.join(File.dirname(path),a_path)
   end
-
-  private
 
   def refresh_record
     yaml = YAML.load File.new(yml_path) 
