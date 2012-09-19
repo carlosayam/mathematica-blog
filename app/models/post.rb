@@ -92,14 +92,23 @@ class Post < ActiveRecord::Base
 
   def self.process_cdf(str)
     pattern = /<p class="Output">\s*<a id="(([^.]+)\.cdf)"><\/a>\s*<([^>]+)>\s*<\/p>/mi
-    replacement = <<-eos
-      <script type="text/javascript">
-      var cdf = cdfplugin();
-      cdf.setDefaultContent('<p class="Output"><\\3><br/><small>You need free <a href="http://www.wolfram.com/cdf-player/">CDF player</a> from Wolfram.</small></p>');
-      cdf.embed('\\1', 431, 344);
-    </script>
-    eos
-    str.gsub(pattern, replacement)
+    str.gsub(pattern) do |match|
+      cdf_name = $1
+      inner_html = $3
+      wh = $3.match(/width="([0-9]+)" height="([0-9]+)"/) do
+             "#{$1}, #{$2.to_i + 14}"
+        end
+      replacement = <<-eos
+         <script type="text/javascript">
+         //<![CDATA[
+         var cdf = cdfplugin();
+         cdf.setDefaultContent('<p class="Output"><#{inner_html}><br/><small>Interactive content: needs free <a href="http://www.wolfram.com/cdf-player/">CDF player</a>.</small></p>');
+         cdf.embed('#{cdf_name}', #{wh});
+         //]]>
+         </script>
+      eos
+      replacement 
+      end
   end
 
 end
