@@ -3,4 +3,6 @@ deploy_role: example.com
 deploy_user: example_user
 posts_folder: path/to/posts/folder
 disqus_shortname: disqus_example
+blog_name: Mathematica-Blog
+blog_legend: Forever blogging
 

@@ -96,7 +96,7 @@ class Post < ActiveRecord::Base
       cdf_name = $1
       inner_html = $3
       wh = $3.match(/width="([0-9]+)" height="([0-9]+)"/) do
-             "#{$1}, #{$2.to_i + 14}"
+             "#{$1.to_i + 15}, #{$2.to_i + 14}"
         end
       replacement = <<-eos
          <script type="text/javascript">

@@ -1,6 +1,6 @@
 %h1 
-  Bloglets
-  %small An ever emerging topic
+  = Rails.application.config.blog_name
+  %small= Rails.application.config.blog_legend
 
 %h2 Recent posts
 - posts_recent.each do |a_post|

@@ -41,5 +41,7 @@ MathematicaBlog::Application.configure do
   config.admin_password = 'test'
   config.about_id = 1
   config.disqus_shortname = '_disqus_';
+  config.blog_name = 'Bloglets'
+  config.blog_legend = 'In Mathematica'
 
 end
