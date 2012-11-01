@@ -110,9 +110,10 @@ class Post < ActiveRecord::Base
       start_pos = 6 + str.index('<body>')
       end_pos = str.index('</body>')
       str = str.slice(0, start_pos)
-      return str.slice(end_pos-start_pos, str.size)
+      str.slice(end_pos-start_pos, str.size)
+    else
+      str
     end
-    str
   end
 
   def self.process_cdf(str)
