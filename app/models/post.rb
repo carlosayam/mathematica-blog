@@ -109,8 +109,8 @@ class Post < ActiveRecord::Base
     if str.include? '<body>'
       start_pos = 6 + str.index('<body>')
       end_pos = str.index('</body>')
-      str = str.slice(0, start_pos)
-      str.slice(end_pos-start_pos, str.size)
+      end_pos = str.size if end_pos.nil?
+      str.slice(start_pos, end_pos - start_pos)
     else
       str
     end
