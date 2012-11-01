@@ -37,7 +37,7 @@ MathematicaBlog::Application.configure do
   config.assets.debug = true
 
   # location of posts folder
-  config.posts_folder = "#{config.root}/posts"
+  config.posts_folder = "/Users/carlos/tmp/posts" # "#{config.root}/posts"
   config.admin_user = 'admin'
   config.admin_password = 'admin'
   config.about_id = 1

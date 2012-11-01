@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810100133) do
+ActiveRecord::Schema.define(:version => 20121030231052) do
 
   create_table "posts", :force => true do |t|
     t.integer  "year"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(:version => 20120810100133) do
   create_table "tags_posts", :force => true do |t|
     t.integer "tag_id",  :null => false
     t.integer "post_id", :null => false
+  end
+
+  create_table "wikipedia_articles", :force => true do |t|
+    t.string "title"
+  end
+
+  create_table "wikipedia_posts", :force => true do |t|
+    t.integer "wikipedia_article_id", :null => false
+    t.integer "post_id",              :null => false
   end
 
 end

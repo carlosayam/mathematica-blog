@@ -11,6 +11,9 @@ FactoryGirl.define do
         ['example', 'rspec', 'two words'].each do |s|
           FactoryGirl.create(:tags_post, :tag => FactoryGirl.create(:tag, :text => s), :post => post)  
         end
+        ['M-Estimator', 'Haar measure'].each do |s|
+          FactoryGirl.create(:wikipedia_post, :wikipedia_article => FactoryGirl.create(:wikipedia_article, :title => s), :post => post)  
+        end
       end
     end
 end

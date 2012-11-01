@@ -7,6 +7,10 @@ class PostsController < ApplicationController
     tags = TagsPost.where('post_id = ?', post.id).map {|tp| tp.tag}
     tags.sort { |a,b| a.text <=> b.text }
   }
+  expose(:post_wikipedias) { 
+    articles = WikipediaPost.where('post_id = ?', post.id).map {|wp| wp.wikipedia_article}
+    articles.sort { |a,b| a.title <=> b.title }
+  }
 
   layout "default"
 
@@ -73,7 +77,6 @@ class PostsController < ApplicationController
     extname = File.extname(file_path)[1..-1]
     mime_type = Mime::Type.lookup_by_extension(extname)
     content_type = mime_type.to_s unless mime_type.nil?
-    puts "render_file(#{file_path}, #{content_type})"
     self.response.headers['Content-Type'] = content_type
     self.response.headers['Content-Disposition'] = 'inline'
     self.response.headers['Last-Modified'] = Time.now.ctime.to_s

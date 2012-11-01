@@ -28,4 +28,10 @@ describe Post do
     post.tags.map(&p).should include('two words')   
   end
 
+  it "has wikipedia references" do
+    post.wikipedia_articles.size.should == 2
+    p = lambda {|wa| wa.title}
+    post.wikipedia_articles.map(&p).should include('M-Estimator')   
+  end
+
 end

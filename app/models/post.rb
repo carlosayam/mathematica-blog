@@ -8,13 +8,15 @@ class Post < ActiveRecord::Base
   attr_accessible :year, :title, :path, :path_mtime, :description
   has_many :tags_posts
   has_many :tags, :through => :tags_posts
+  has_many :wikipedia_posts
+  has_many :wikipedia_articles, :through => :wikipedia_posts
 
   scope :list_year, lambda { |year| where("year = ?",year) }
   scope :recent, order(:id).reverse_order.limit(5)
 
   def check_file
     return false unless FileTest.file?(path) && FileTest.file?(yml_path)
-    return true if path_mtime == File.mtime(path)
+    return true if path_mtime >= File.mtime(path).to_i && path_mtime >= File.mtime(yml_path).to_i
     return refresh_record
   end
 
@@ -30,6 +32,7 @@ class Post < ActiveRecord::Base
 
   def self.reload_year(year)
     year_dir = "#{Rails.application.config.posts_folder}/#{year}"
+    puts "RELOAD #{year_dir}"
     return false unless File.directory? year_dir
     # set path_mtime to 0 for the year
     min_path_mtime = nil
@@ -65,29 +68,51 @@ class Post < ActiveRecord::Base
     yaml = YAML.load File.new(yml_path) 
     self.title = yaml['title']
     self.description = yaml['description']
-    if yaml['tags']
-      tag_list = yaml['tags'].map {|term| Tag.find_or_create(term)}
-      TagsPost.find_all_by_post_id(self.id).each {|tp| tp.destroy }
-      puts tag_list.each {|t| TagsPost.new(:tag => t, :post => self).save }
-    end
     Post.process_html(path)
-    self.path_mtime = File.mtime path
+    self.refresh_tags(yaml)
+    self.refresh_wikipedia(yaml)
+    self.path_mtime = [File.mtime(path), File.mtime(yml_path)].max
     self.save()
     return self.reload
   end
 
+  def refresh_tags(yaml)
+    if yaml['tags']
+      tag_list = yaml['tags'].map {|term| Tag.find_or_create(term)}
+      TagsPost.find_all_by_post_id(self.id).each {|tp| tp.destroy }
+      puts tag_list.each {|t| TagsPost.new(:tag => t, :post => self).save }
+    else
+      TagsPost.find_all_by_post_id(self.id).each {|tp| tp.destroy }
+    end
+  end
+
+  def refresh_wikipedia(yaml)
+    if yaml['wikipedia']
+      wa_list = yaml['wikipedia'].map {|title| WikipediaArticle.find_or_create(title)}
+      WikipediaPost.find_all_by_post_id(self.id).each {|wp| wp.destroy }
+      puts wa_list.each {|wa| WikipediaPost.new(:wikipedia_article => wa, :post => self).save }
+    else
+      WikipediaPost.find_all_by_post_id(self.id).each {|wp| wp.destroy }
+    end
+  end
+
   def self.process_html(html_file)
     str = File.read(html_file)
+    str = self.process_body(str)
+    str = self.process_cdf(str)
+    File.open(html_file,'w') do |f|
+      f.write(ENCODER.convert(str))
+    end
+  end
+
+  def self.process_body(str)
     if str.include? '<body>'
       start_pos = 6 + str.index('<body>')
       end_pos = str.index('</body>')
-      str.slice! 0, start_pos
-      str.slice! end_pos-start_pos, str.size
-      str = self.process_cdf(str)
-      File.open(html_file,'w') do |f|
-        f.write(ENCODER.convert(str))
-      end
+      str = str.slice(0, start_pos)
+      return str.slice(end_pos-start_pos, str.size)
     end
+    str
   end
 
   def self.process_cdf(str)

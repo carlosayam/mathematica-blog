@@ -16,7 +16,7 @@ MathematicaBlog::Application.routes.draw do
   match 'tags/' => 'tags#index', :as => :tag_index
   match 'tags', :to => redirect {|env, params| "/tags/"}
   match 'about', :to => redirect {|env, params| 
-    post = Post.find(Rails.application.config.about_id)
+    post = Post.find(:first, :conditions => ["lower(title) = ?",'about'])
     "/post/#{post.year}/#{post.title}/"
     }
   match 'np/:id' => 'posts#by_id', :as => :post_short, :format => false
