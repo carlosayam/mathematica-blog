@@ -5,7 +5,7 @@ class Post < ActiveRecord::Base
 
   ENCODER = Encoding::Converter.new("US-ASCII","UTF-8", {:invalid => :replace, :undef => :replace })
 
-  attr_accessible :year, :title, :path, :path_mtime, :description
+  attr_accessible :year, :title, :path, :path_mtime, :description, :image
   has_many :tags_posts
   has_many :tags, :through => :tags_posts
   has_many :wikipedia_posts
@@ -66,12 +66,15 @@ class Post < ActiveRecord::Base
 
   def refresh_record
     yaml = YAML.load File.new(yml_path) 
+    puts "Refreshing #{self.title}"
+    puts yaml.inspect
     self.title = yaml['title']
     self.description = yaml['description']
     Post.process_html(path)
     self.refresh_tags(yaml)
     self.refresh_wikipedia(yaml)
     self.path_mtime = [File.mtime(path), File.mtime(yml_path)].max
+    self.image = yaml['image']
     self.save()
     return self.reload
   end

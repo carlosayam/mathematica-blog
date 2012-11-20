@@ -34,4 +34,8 @@ describe Post do
     post.wikipedia_articles.map(&p).should include('M-Estimator')   
   end
 
+  it "has reference image" do
+    post.image.should eq('HTMLImage/image.png')
+  end
+
 end

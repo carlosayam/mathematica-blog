@@ -7,6 +7,8 @@ FactoryGirl.define do
       year 2012
       path file_path
       path_mtime File.mtime(file_path)
+      image 'HTMLImage/image.png'
+      description 'This is a sample post'
       after(:create) do |post, evaluator|
         ['example', 'rspec', 'two words'].each do |s|
           FactoryGirl.create(:tags_post, :tag => FactoryGirl.create(:tag, :text => s), :post => post)  
