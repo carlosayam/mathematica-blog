@@ -1,0 +1,505 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     23323,        496]
+NotebookOptionsPosition[     22954,        478]
+NotebookOutlinePosition[     23310,        494]
+CellTagsIndexPosition[     23267,        491]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+TEST OF CDF/CODE GENERATION - Carlos Aya\
+\>", "Text",
+ CellChangeTimes->{{3.560764248471539*^9, 3.56076425795872*^9}, {
+  3.5629917563338003`*^9, 3.56299175850135*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"PaletteNotebook", "[", "\[IndentingNewLine]", 
+  RowBox[{"Button", "[", 
+   RowBox[{
+    RowBox[{"Style", "[", 
+     RowBox[{"\"\<Blog it\>\"", ",", "12", ",", 
+      RowBox[{"FontFamily", "\[Rule]", "\"\<Times\>\""}]}], "]"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"nb", " ", "=", " ", 
+         RowBox[{"InputNotebook", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{"fpath", " ", "=", " ", 
+         RowBox[{"NotebookDirectory", "[", 
+          RowBox[{"InputNotebook", "[", "]"}], "]"}]}], ",", 
+        "\[IndentingNewLine]", 
+        RowBox[{"htmlName", " ", "=", " ", 
+         RowBox[{
+          RowBox[{"StringDrop", "[", 
+           RowBox[{
+            RowBox[{"NotebookFileName", "[", 
+             RowBox[{"InputNotebook", "[", "]"}], "]"}], ",", 
+            RowBox[{"-", "3"}]}], "]"}], "<>", "\"\<.html\>\""}]}], ",", 
+        "\[IndentingNewLine]", "generateCDF", ",", "\[IndentingNewLine]", 
+        "generateCDFs", ",", "\[IndentingNewLine]", "exportHTML"}], 
+       "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"generateCDF", "[", 
+         RowBox[{"nb_", ",", "name_"}], "]"}], " ", ":=", " ", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", "sel", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"sel", " ", "=", " ", 
+            RowBox[{"SelectionMove", "[", 
+             RowBox[{"nb", ",", "Next", ",", "Cell"}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Message", "[", 
+            RowBox[{
+             RowBox[{"generateCDF", "::", "info"}], ",", "name"}], "]"}], ";",
+            "\[IndentingNewLine]", 
+           RowBox[{"Export", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"fpath", ",", "name"}], "}"}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Notebook", "[", 
+              RowBox[{"{", 
+               RowBox[{"NotebookRead", "[", "nb", "]"}], "}"}], "]"}], ",", 
+             "\[IndentingNewLine]", "\"\<CDF\>\""}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"SelectionMove", "[", 
+            RowBox[{
+            "nb", ",", "\"\<Input\>\"", ",", "Next", ",", "CellStyle"}], 
+            "]"}]}]}], "\[IndentingNewLine]", "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"generateCDF", "::", "info"}], " ", "=", " ", 
+        "\"\<Generating CDF `1`\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"generateCDFs", "[", "nb_", "]"}], " ", ":=", " ", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"sel", ",", " ", "curID"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"SelectionMove", "[", 
+            RowBox[{"nb", ",", "Before", ",", "Notebook"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"sel", " ", "=", " ", 
+            RowBox[{"NotebookFind", "[", 
+             RowBox[{
+             "nb", ",", "\"\<Input\>\"", ",", "Next", ",", "CellStyle"}], 
+             "]"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"While", "[", " ", 
+            RowBox[{
+             RowBox[{"MatchQ", "[", 
+              RowBox[{"sel", ",", "_NotebookSelection"}], "]"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"curID", " ", "=", " ", 
+               RowBox[{"CurrentValue", "[", 
+                RowBox[{"sel", ",", "CellID"}], "]"}]}], ";", 
+              "\[IndentingNewLine]", 
+              RowBox[{"sel", "=", " ", 
+               RowBox[{"Switch", "[", 
+                RowBox[{
+                 RowBox[{"CurrentValue", "[", 
+                  RowBox[{"sel", ",", "CellTags"}], "]"}], ",", 
+                 "\[IndentingNewLine]", "_String", ",", 
+                 RowBox[{"generateCDF", "[", 
+                  RowBox[{"nb", ",", " ", 
+                   RowBox[{"CurrentValue", "[", 
+                    RowBox[{"sel", ",", "CellTags"}], "]"}]}], "]"}], ",", 
+                 "\[IndentingNewLine]", "_", ",", 
+                 RowBox[{"NotebookFind", "[", 
+                  RowBox[{
+                  "nb", ",", "\"\<Input\>\"", ",", "Next", ",", "CellStyle"}],
+                   "]"}]}], "\[IndentingNewLine]", "]"}]}], ";"}]}], 
+            "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", 
+         "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"exportHTML", "[", "nb_", "]"}], " ", ":=", " ", 
+        RowBox[{"Module", "[", 
+         RowBox[{
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{"rules", " ", "=", " ", 
+            RowBox[{"{", "\[IndentingNewLine]", 
+             RowBox[{"\"\<Input\>\"", " ", "\[Rule]", " ", 
+              RowBox[{"{", "\[IndentingNewLine]", 
+               RowBox[{
+               "\"\<\\n<pre class=\\\"code\\\">\\n\>\"", ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{
+                 RowBox[{"DisplayForm", "[", "#", "]"}], "&"}], ",", 
+                "\[IndentingNewLine]", "\"\<\\n</pre>\\n\>\""}], 
+               "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "}"}]}],
+            "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Message", "[", 
+            RowBox[{
+             RowBox[{"exportHTML", "::", "info"}], ",", 
+             RowBox[{"FileNameTake", "[", "htmlName", "]"}]}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Export", "[", "\[IndentingNewLine]", 
+            RowBox[{
+            "htmlName", ",", "\[IndentingNewLine]", "nb", ",", 
+             "\[IndentingNewLine]", "\"\<HTML\>\"", ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"\"\<CSS\>\"", " ", "\[Rule]", " ", "None"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"\"\<MathOutput\>\"", "\[Rule]", "\"\<GIF\>\""}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"\"\<ConvertReverseClosed\>\"", "\[Rule]", "True"}], ",",
+              "\[IndentingNewLine]", 
+             RowBox[{"\"\<ConversionRules\>\"", "\[Rule]", "rules"}]}], 
+            "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"Message", "[", 
+            RowBox[{"exportHTML", "::", "done"}], "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}]}], ";", " ", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"yet", " ", "to", " ", "be", " ", "done"}], ",", " ", 
+         RowBox[{"ignore", " ", "for", " ", "now"}]}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"exportHTML", "::", "info"}], " ", "=", " ", 
+        "\"\<Generating HTML `1`\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"exportHTML", "::", "done"}], " ", "=", " ", 
+        "\"\<Export to HTML done\>\""}], ";", "\[IndentingNewLine]", 
+       RowBox[{"generateCDFs", "[", "nb", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"exportHTML", "[", "nb", "]"}], ";"}]}], "\[IndentingNewLine]",
+      "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Appearance", "\[Rule]", "\"\<Palette\>\""}]}], "]"}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.562647870800758*^9, 3.562647875681188*^9}, {
+   3.562648051631235*^9, 3.56264805812881*^9}, {3.562648094536316*^9, 
+   3.562648190896915*^9}, {3.56264823274815*^9, 3.562648539285368*^9}, {
+   3.562648644901753*^9, 3.562648650699664*^9}, {3.5626487421831427`*^9, 
+   3.562648809807992*^9}, {3.562648856123687*^9, 3.562648888137313*^9}, {
+   3.5626489931565447`*^9, 3.562649027563861*^9}, {3.5626490890523376`*^9, 
+   3.562649155791347*^9}, {3.562649772572213*^9, 3.562649777370571*^9}, {
+   3.562649963958207*^9, 3.562650010622542*^9}, {3.56270027756534*^9, 
+   3.5627003163233232`*^9}, 3.56270035116432*^9, 3.562700803560693*^9, {
+   3.5627010719054956`*^9, 3.562701123040865*^9}, {3.5627032514389267`*^9, 
+   3.562703296146894*^9}, 3.562703360311205*^9, {3.562724465406171*^9, 
+   3.562724468169313*^9}, {3.562903725317218*^9, 3.562903734051762*^9}, {
+   3.56290401132789*^9, 3.56290401612906*^9}, {3.562904051593945*^9, 
+   3.562904280531149*^9}, {3.5629043357018967`*^9, 3.56290437107638*^9}, {
+   3.562904415144291*^9, 3.562904531984694*^9}, {3.562904610539228*^9, 
+   3.562904730165286*^9}, {3.562904824042678*^9, 3.562904828894845*^9}, {
+   3.562904931539784*^9, 3.562904938385112*^9}, {3.5629049902511683`*^9, 
+   3.5629051885894413`*^9}, 3.562905296463978*^9, {3.562905364944489*^9, 
+   3.5629054888747883`*^9}, {3.5629055850454493`*^9, 3.562905623117004*^9}, {
+   3.56291165838026*^9, 3.562912082936427*^9}, {3.56291212861626*^9, 
+   3.562912472039591*^9}, {3.562912504055509*^9, 3.5629126451768837`*^9}, {
+   3.562912719001091*^9, 3.5629127194547033`*^9}, {3.562912762416733*^9, 
+   3.56291288466789*^9}, {3.5629129364294*^9, 3.562912936874436*^9}, {
+   3.5629129708359737`*^9, 3.562912973711063*^9}, {3.5629130438492317`*^9, 
+   3.562913096477253*^9}, {3.5629131446048117`*^9, 3.562913146196137*^9}, {
+   3.562913196450521*^9, 3.562913218136763*^9}, {3.562913503930997*^9, 
+   3.562913515585025*^9}, {3.562913629136628*^9, 3.5629136396459007`*^9}, {
+   3.5629136755577993`*^9, 3.5629136781721*^9}, {3.562913918072619*^9, 
+   3.5629139306466703`*^9}, {3.562914171048243*^9, 3.562914186359017*^9}, {
+   3.562957763050115*^9, 3.5629577647629747`*^9}, {3.562957853939268*^9, 
+   3.56295788075974*^9}, {3.5629580099668818`*^9, 3.5629580372678413`*^9}, {
+   3.562958218844007*^9, 3.562958234990519*^9}, {3.5629585174256353`*^9, 
+   3.562958567029882*^9}, {3.5629585991803503`*^9, 3.562958613483774*^9}, {
+   3.562958699404195*^9, 3.5629587371780653`*^9}, {3.5629587846014977`*^9, 
+   3.562958809153404*^9}, {3.562958873955593*^9, 3.562958934864053*^9}, {
+   3.5629589862702303`*^9, 3.562959029103231*^9}, {3.562959523358994*^9, 
+   3.562959582983384*^9}, {3.562959623630591*^9, 3.5629596714775352`*^9}, {
+   3.562959705334723*^9, 3.562959719422063*^9}, {3.562959809643093*^9, 
+   3.562959817662595*^9}, {3.562990407524557*^9, 3.5629904300165997`*^9}, {
+   3.5629910322128267`*^9, 3.562991067565672*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  PanelBox[GridBox[{
+     {
+      TooltipBox[
+       ButtonBox[
+        StyleBox[
+         DynamicBox[FEPrivate`FrontEndResource[
+          "FEBitmaps", "ManipulatePasteIcon"],
+          ImageSizeCache->{13., {4., 9.}}],
+         DynamicUpdating->True],
+        Appearance->{Automatic, None},
+        ButtonFunction:>FrontEndExecute[{
+           FrontEnd`NotebookPut[
+            Notebook[{
+              Cell[
+               BoxData[
+                ButtonBox[
+                 StyleBox[
+                 "\"Blog it\"", 12, FontFamily -> "Times", StripOnInput -> 
+                  False], ButtonFunction :> 
+                 Module[{$CellContext`nb = 
+                    InputNotebook[], $CellContext`fpath = NotebookDirectory[
+                    InputNotebook[]], $CellContext`htmlName = StringJoin[
+                    StringDrop[
+                    NotebookFileName[
+                    InputNotebook[]], -3], 
+                    ".html"], $CellContext`generateCDF, \
+$CellContext`generateCDFs, $CellContext`exportHTML}, $CellContext`generateCDF[
+                    
+                    Pattern[$CellContext`nb, 
+                    Blank[]], 
+                    Pattern[$CellContext`name, 
+                    Blank[]]] := 
+                    Module[{$CellContext`sel}, $CellContext`sel = 
+                    SelectionMove[$CellContext`nb, Next, Cell]; Message[
+                    
+                    MessageName[$CellContext`generateCDF, 
+                    "info"], $CellContext`name]; Export[
+                    FileNameJoin[{$CellContext`fpath, $CellContext`name}], 
+                    Notebook[{
+                    NotebookRead[$CellContext`nb]}], "CDF"]; 
+                    SelectionMove[$CellContext`nb, "Input", Next, CellStyle]]; 
+                   MessageName[$CellContext`generateCDF, "info"] = 
+                    "Generating CDF `1`"; $CellContext`generateCDFs[
+                    Pattern[$CellContext`nb, 
+                    Blank[]]] := 
+                    Module[{$CellContext`sel, $CellContext`curID}, 
+                    SelectionMove[$CellContext`nb, Before, 
+                    Notebook]; $CellContext`sel = 
+                    NotebookFind[$CellContext`nb, "Input", Next, CellStyle]; 
+                    While[
+                    MatchQ[$CellContext`sel, 
+                    Blank[NotebookSelection]], $CellContext`curID = 
+                    CurrentValue[$CellContext`sel, CellID]; $CellContext`sel = 
+                    Switch[
+                    CurrentValue[$CellContext`sel, CellTags], 
+                    Blank[String], 
+                    $CellContext`generateCDF[$CellContext`nb, 
+                    CurrentValue[$CellContext`sel, CellTags]], 
+                    Blank[], 
+                    NotebookFind[$CellContext`nb, "Input", Next, CellStyle]]; 
+                    Null]; Null]; $CellContext`exportHTML[
+                    Pattern[$CellContext`nb, 
+                    Blank[]]] := 
+                    Module[{$CellContext`rules = {
+                    "Input" -> {
+                    "\n<pre class=\"code\">\n", DisplayForm[#]& , 
+                    "\n</pre>\n"}}}, Message[
+                    MessageName[$CellContext`exportHTML, "info"], 
+                    FileNameTake[$CellContext`htmlName]]; 
+                    Export[$CellContext`htmlName, $CellContext`nb, "HTML", 
+                    "CSS" -> None, "MathOutput" -> "GIF", 
+                    "ConvertReverseClosed" -> True, 
+                    "ConversionRules" -> $CellContext`rules]; Message[
+                    MessageName[$CellContext`exportHTML, "done"]]; Null]; 
+                   MessageName[$CellContext`exportHTML, "info"] = 
+                    "Generating HTML `1`"; 
+                   MessageName[$CellContext`exportHTML, "done"] = 
+                    "Export to HTML done"; \
+$CellContext`generateCDFs[$CellContext`nb]; \
+$CellContext`exportHTML[$CellContext`nb]; Null], Appearance -> "Palette", 
+                 Evaluator -> Automatic, Method -> "Preemptive"]]]}, 
+             WindowElements -> {}, 
+             WindowMargins -> {{Automatic, 0}, {Automatic, 0}}, WindowSize -> 
+             All, StyleDefinitions -> "Palette.nb"]]}],
+        DefaultBaseStyle->{},
+        Evaluator->None,
+        Method->"Queued"],
+       DynamicBox[
+        ToBoxes[
+         FEPrivate`FrontEndResource["FEStrings", "NotebookInNewWindow"]]]]},
+     {
+      ItemBox[GridBox[{
+         {Cell[BoxData[
+           ButtonBox[
+            StyleBox["\<\"Blog it\"\>",
+             StripOnInput->False,
+             FontFamily->"Times",
+             FontSize->12],
+            Appearance->"Palette",
+            
+            ButtonFunction:>
+             Module[{$CellContext`nb = InputNotebook[], $CellContext`fpath = 
+               NotebookDirectory[
+                 InputNotebook[]], $CellContext`htmlName = StringJoin[
+                 StringDrop[
+                  NotebookFileName[
+                   InputNotebook[]], -3], 
+                 ".html"], $CellContext`generateCDF, \
+$CellContext`generateCDFs, $CellContext`exportHTML}, $CellContext`generateCDF[
+                
+                 Pattern[$CellContext`nb, 
+                  Blank[]], 
+                 Pattern[$CellContext`name, 
+                  Blank[]]] := 
+               Module[{$CellContext`sel}, $CellContext`sel = 
+                  SelectionMove[$CellContext`nb, Next, Cell]; Message[
+                   
+                   MessageName[$CellContext`generateCDF, 
+                    "info"], $CellContext`name]; Export[
+                   FileNameJoin[{$CellContext`fpath, $CellContext`name}], 
+                   Notebook[{
+                    NotebookRead[$CellContext`nb]}], "CDF"]; 
+                 SelectionMove[$CellContext`nb, "Input", Next, CellStyle]]; 
+              MessageName[$CellContext`generateCDF, "info"] = 
+               "Generating CDF `1`"; $CellContext`generateCDFs[
+                 Pattern[$CellContext`nb, 
+                  Blank[]]] := 
+               Module[{$CellContext`sel, $CellContext`curID}, 
+                 SelectionMove[$CellContext`nb, Before, 
+                   Notebook]; $CellContext`sel = 
+                  NotebookFind[$CellContext`nb, "Input", Next, CellStyle]; 
+                 While[
+                   MatchQ[$CellContext`sel, 
+                    Blank[NotebookSelection]], $CellContext`curID = 
+                    CurrentValue[$CellContext`sel, CellID]; $CellContext`sel = 
+                    Switch[
+                    CurrentValue[$CellContext`sel, CellTags], 
+                    Blank[String], 
+                    $CellContext`generateCDF[$CellContext`nb, 
+                    CurrentValue[$CellContext`sel, CellTags]], 
+                    Blank[], 
+                    NotebookFind[$CellContext`nb, "Input", Next, CellStyle]]; 
+                   Null]; Null]; $CellContext`exportHTML[
+                 Pattern[$CellContext`nb, 
+                  Blank[]]] := 
+               Module[{$CellContext`rules = {
+                   "Input" -> {
+                    "\n<pre class=\"code\">\n", DisplayForm[#]& , 
+                    "\n</pre>\n"}}}, Message[
+                   MessageName[$CellContext`exportHTML, "info"], 
+                   FileNameTake[$CellContext`htmlName]]; 
+                 Export[$CellContext`htmlName, $CellContext`nb, "HTML", "CSS" -> 
+                   None, "MathOutput" -> "GIF", "ConvertReverseClosed" -> 
+                   True, "ConversionRules" -> $CellContext`rules]; Message[
+                   MessageName[$CellContext`exportHTML, "done"]]; Null]; 
+              MessageName[$CellContext`exportHTML, "info"] = 
+               "Generating HTML `1`"; 
+              MessageName[$CellContext`exportHTML, "done"] = 
+               "Export to HTML done"; \
+$CellContext`generateCDFs[$CellContext`nb]; \
+$CellContext`exportHTML[$CellContext`nb]; Null],
+            Evaluator->Automatic,
+            Method->"Preemptive"]]]}
+        },
+        GridBoxAlignment->{
+         "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, 
+          "Rows" -> {{Baseline}}, "RowsIndexed" -> {}}],
+       Background->GrayLevel[1],
+       Frame->True,
+       FrameStyle->GrayLevel[0, 0.2]]}
+    },
+    GridBoxAlignment->{
+     "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+      "RowsIndexed" -> {}}],
+   BaseStyle->{FontFamily -> "Times"},
+   DefaultBaseStyle->{},
+   FrameMargins->5],
+  PaletteNotebook[
+   Button[
+    Style["Blog it", 12, FontFamily -> "Times"], 
+    Module[{$CellContext`nb = InputNotebook[], $CellContext`fpath = 
+      NotebookDirectory[
+        InputNotebook[]], $CellContext`htmlName = StringJoin[
+        StringDrop[
+         NotebookFileName[
+          InputNotebook[]], -3], 
+        ".html"], $CellContext`generateCDF, $CellContext`generateCDFs, \
+$CellContext`exportHTML}, $CellContext`generateCDF[
+        Pattern[$CellContext`nb, 
+         Blank[]], 
+        Pattern[$CellContext`name, 
+         Blank[]]] := 
+      Module[{$CellContext`sel}, $CellContext`sel = 
+         SelectionMove[$CellContext`nb, Next, Cell]; Message[
+          MessageName[$CellContext`generateCDF, "info"], $CellContext`name]; 
+        Export[
+          FileNameJoin[{$CellContext`fpath, $CellContext`name}], 
+          Notebook[{
+            NotebookRead[$CellContext`nb]}], "CDF"]; 
+        SelectionMove[$CellContext`nb, "Input", Next, CellStyle]]; 
+     MessageName[$CellContext`generateCDF, "info"] = 
+      "Generating CDF `1`"; $CellContext`generateCDFs[
+        Pattern[$CellContext`nb, 
+         Blank[]]] := 
+      Module[{$CellContext`sel, $CellContext`curID}, 
+        SelectionMove[$CellContext`nb, Before, Notebook]; $CellContext`sel = 
+         NotebookFind[$CellContext`nb, "Input", Next, CellStyle]; While[
+          MatchQ[$CellContext`sel, 
+           Blank[NotebookSelection]], $CellContext`curID = 
+           CurrentValue[$CellContext`sel, CellID]; $CellContext`sel = Switch[
+             CurrentValue[$CellContext`sel, CellTags], 
+             Blank[String], 
+             $CellContext`generateCDF[$CellContext`nb, 
+              CurrentValue[$CellContext`sel, CellTags]], 
+             Blank[], 
+             NotebookFind[$CellContext`nb, "Input", Next, CellStyle]]; Null]; 
+        Null]; $CellContext`exportHTML[
+        Pattern[$CellContext`nb, 
+         Blank[]]] := 
+      Module[{$CellContext`rules = {
+          "Input" -> {
+            "\n<pre class=\"code\">\n", DisplayForm[#]& , "\n</pre>\n"}}}, 
+        Message[
+          MessageName[$CellContext`exportHTML, "info"], 
+          FileNameTake[$CellContext`htmlName]]; 
+        Export[$CellContext`htmlName, $CellContext`nb, "HTML", "CSS" -> None, 
+          "MathOutput" -> "GIF", "ConvertReverseClosed" -> True, 
+          "ConversionRules" -> $CellContext`rules]; Message[
+          MessageName[$CellContext`exportHTML, "done"]]; Null]; 
+     MessageName[$CellContext`exportHTML, "info"] = "Generating HTML `1`"; 
+     MessageName[$CellContext`exportHTML, "done"] = 
+      "Export to HTML done"; $CellContext`generateCDFs[$CellContext`nb]; \
+$CellContext`exportHTML[$CellContext`nb]; Null], Appearance -> 
+    "Palette"]]]], "Output",
+ CellChangeTimes->{
+  3.5626491624214487`*^9, 3.562649787024981*^9, 3.562700805028737*^9, 
+   3.562701131427362*^9, 3.562703379317275*^9, 3.562904284548514*^9, 
+   3.562904346673416*^9, 3.562904391548118*^9, 3.5629052169844007`*^9, 
+   3.5629126794101057`*^9, 3.562912726661677*^9, 3.5629128978838778`*^9, 
+   3.56291297648969*^9, 3.562913098504277*^9, 3.562913152308462*^9, 
+   3.562913227580339*^9, 3.56291352539714*^9, 3.562913648267385*^9, 
+   3.562957906644495*^9, 3.562958044968223*^9, {3.562959755787243*^9, 
+   3.5629597599745207`*^9}, 3.562959820663569*^9, 3.562990444539384*^9, {
+   3.562991073037426*^9, 3.562991087827465*^9}}]
+}, Open  ]]
+},
+WindowSize->{740, 689},
+WindowMargins->{{Automatic, 283}, {Automatic, 45}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 179, 4, 26, "Text"],
+Cell[CellGroupData[{
+Cell[761, 28, 10349, 200, 898, "Input"],
+Cell[11113, 230, 11825, 245, 73, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

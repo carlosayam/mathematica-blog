@@ -1,0 +1,602 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     23983,        593]
+NotebookOptionsPosition[     22548,        540]
+NotebookOutlinePosition[     23127,        566]
+CellTagsIndexPosition[     23057,        561]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Sample post", "Title",
+ CellChangeTimes->{{3.558382434599513*^9, 3.5583824390082293`*^9}, 
+   3.5586390680049667`*^9, 3.55868464222521*^9, {3.5626479659279747`*^9, 
+   3.5626479734588013`*^9}, 3.562990452651004*^9, 3.562990527085108*^9, {
+   3.562991102536861*^9, 3.5629911246218367`*^9}}],
+
+Cell["\<\
+Few weeks ago I ventured in the possibility of creating a median generating \
+function. There, it is shown that the median satifies:\
+\>", "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+   3.558382646982203*^9, 3.5583827116404676`*^9}, 3.558415559111314*^9, 
+   3.558639068005102*^9, 3.558684642225298*^9, 3.562990452651084*^9, 
+   3.562990527085252*^9, {3.562991102536928*^9, 3.5629911246219063`*^9}}],
+
+Cell[TextData[{
+ "\t\[DoubleStruckCapitalM]d[X] = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["argmin", "v"], 
+    RowBox[{"\[DoubleStruckCapitalE]", "[", 
+     RowBox[{"\[LeftBracketingBar]", 
+      RowBox[{"X", "-", "v"}], "\[RightBracketingBar]"}], "]"}]}], 
+   TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+   3.558382646982203*^9, 3.558382753873004*^9}, 3.5584155664716177`*^9, {
+   3.55863906800525*^9, 3.558639068006014*^9}, {3.558684642225449*^9, 
+   3.5586846422262917`*^9}, {3.562990452651263*^9, 3.562990452651916*^9}, {
+   3.562990527085518*^9, 3.5629905270868063`*^9}, {3.562991102537084*^9, 
+   3.56299112462276*^9}}],
+
+Cell["\<\
+I didn\[CloseCurlyQuote]t mentioned there, but it is also true that\
+\>", "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+   3.558382646982203*^9, 3.558382788789712*^9}, 3.5586390680060596`*^9, 
+   3.558684642226359*^9, 3.56299045265196*^9, 3.562990527086893*^9, {
+   3.562991102537773*^9, 3.562991124622808*^9}}],
+
+Cell[TextData[{
+ "\t\[DoubleStruckCapitalE][X] = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["argmin", "v"], 
+    RowBox[{"\[DoubleStruckCapitalE]", "[", 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{"X", "-", "v"}], ")"}], "2"], "]"}]}], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+   3.558382646982203*^9, 3.5583828235404177`*^9}, 3.5584155687328787`*^9, {
+   3.558639068006184*^9, 3.5586390680068283`*^9}, {3.558684642226535*^9, 
+   3.5586846422273893`*^9}, {3.56299045265208*^9, 3.562990452652689*^9}, {
+   3.562990527087085*^9, 3.562990527088231*^9}, {3.5629911025378942`*^9, 
+   3.562991124623637*^9}}],
+
+Cell[TextData[{
+ "which looks like a circular definition but it suggested to Huber (in 1964) \
+that all those ",
+ StyleBox["location",
+  FontSlant->"Italic"],
+ " estimators could be described by general pattern. Huber noticed that they \
+included a notion of distance between the estimate and the samples. This is, \
+if you have ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox[
+    RowBox[{"{", 
+     SubscriptBox["X", "i"], "}"}], 
+    RowBox[{"i", "=", 
+     RowBox[{
+      RowBox[{"1", ".."}], "n"}]}]], TraditionalForm]]],
+ " realisations of a random variable, then certainly one can write the median \
+and mean using the following estimators:"
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+  3.558382646982203*^9, 3.558383081926956*^9}, {3.558383113678268*^9, 
+  3.558383125653631*^9}, {3.558396040969112*^9, 3.5583960608228188`*^9}, {
+  3.558415577469441*^9, 3.5584156238858213`*^9}, {3.558639068006936*^9, 
+  3.5586390680077677`*^9}, {3.5586846422275257`*^9, 3.558684642228856*^9}, {
+  3.56299045265281*^9, 3.5629904526536293`*^9}, {3.56299052708841*^9, 
+  3.562990527089848*^9}, {3.56299110253865*^9, 3.5629911246247177`*^9}}],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox[
+    SubscriptBox["x", "M"], "^"], TraditionalForm]]],
+ " =  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["argmin", "v"], 
+    FractionBox["1", "n"], 
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"i", "=", "1"}], "n"], 
+     RowBox[{"\[LeftBracketingBar]", 
+      RowBox[{
+       SubscriptBox["X", "i"], "-", "v"}], "\[RightBracketingBar]"}]}]}], 
+   TraditionalForm]]],
+ ", and"
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+  3.558382646982203*^9, 3.558383081926956*^9}, {3.558383113678268*^9, 
+  3.558383242532235*^9}, {3.558639068007907*^9, 3.5586390680090923`*^9}, {
+  3.558684642228971*^9, 3.558684642230274*^9}, {3.562990452653729*^9, 
+  3.5629904526548367`*^9}, {3.562990527090026*^9, 3.5629905270919323`*^9}, {
+  3.5629911025395737`*^9, 3.562991124626048*^9}}],
+
+Cell[TextData[{
+ Cell[BoxData[
+  FormBox[
+   OverscriptBox["x", "^"], TraditionalForm]]],
+ " =  ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["argmin", "v"], 
+    FractionBox["1", "n"], 
+    RowBox[{
+     UnderoverscriptBox["\[Sum]", 
+      RowBox[{"i", "=", "1"}], "n"], 
+     SuperscriptBox[
+      RowBox[{"(", 
+       RowBox[{
+        SubscriptBox["X", "i"], "-", "v"}], ")"}], "2"]}]}], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+  3.558382646982203*^9, 3.558383081926956*^9}, {3.558383113678268*^9, 
+  3.558383286904477*^9}, {3.5586390680091887`*^9, 3.5586390680103683`*^9}, {
+  3.5586846422303743`*^9, 3.558684642231615*^9}, {3.562990452654935*^9, 
+  3.5629904526560497`*^9}, {3.5629905270920877`*^9, 3.562990527094055*^9}, {
+  3.5629911025408163`*^9, 3.562991124627195*^9}}],
+
+Cell[TextData[{
+ "The similarities are stricking! So, enter Huber\[CloseCurlyQuote]s \
+M-estimators... what if instead of ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"\[LeftBracketingBar]", 
+    RowBox[{
+     SubscriptBox["X", "i"], "-", "t"}]}], TraditionalForm]]],
+ "\[RightBracketingBar], or ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox[
+    RowBox[{"(", 
+     RowBox[{
+      SubscriptBox["X", "i"], "-", "t"}], ")"}], "2"], TraditionalForm]]],
+ " you allow to use other notions of distance? Huber just did that and opened \
+the door to what today are called M-estimators. Actually, the one I am going \
+to describe below, he defined it in terms of the derivative. Why? Because the \
+derivative is the tool you would use in calculus (see previous post about the \
+median) to find the minimum. In this setting"
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+  3.558382646982203*^9, 3.558383081926956*^9}, {3.558383113678268*^9, 
+  3.558383318863316*^9}, {3.558396082216178*^9, 3.55839622447569*^9}, {
+  3.5584156434630547`*^9, 3.558415693670939*^9}, {3.5586390680104933`*^9, 
+  3.5586390680126677`*^9}, {3.558684642231739*^9, 3.5586846422342377`*^9}, {
+  3.562990452656159*^9, 3.562990452658277*^9}, {3.562990527094245*^9, 
+  3.562990527100263*^9}, {3.56299110254224*^9, 3.562991124629426*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Sign", "[", "u", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", 
+     RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+   RowBox[{"AxesLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<x-t\>\"", ",", "\"\<\[Psi]\>\""}], "}"}]}], ",", 
+   RowBox[{"PlotLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"\"\<\[Psi](x,t)=Sign(x-t)\>\"", ",", 
+      RowBox[{"{", 
+       RowBox[{"Bold", ",", "Italic"}], "}"}]}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.558160595908263*^9, 3.558160673673459*^9}, {
+   3.558160704620648*^9, 3.5581607086185207`*^9}, {3.5584161049255333`*^9, 
+   3.558416147046587*^9}, 3.558639068019863*^9, 3.5586846422418337`*^9, {
+   3.5626477153810453`*^9, 3.56264772097754*^9}, 3.5629904526585207`*^9, 
+   3.562990527100678*^9, {3.562991102544751*^9, 3.562991124629685*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{{{}, {}, 
+    {Hue[0.67, 0.6, 0.6], LineBox[CompressedData["
+1:eJxTTMoPSmViYGCQBWIQrWcv9ur////7GcDgw/6g9rOrjeMR/PLzLbnp+/7B
++VeucL86mPgXzpc9kC9iLvMHzt+afYSV/+4vOD+hx/DDzaafcP6PSdUd++1/
+wPmL+e5Jznj4Dc6f42VYdLnzK5zflJNYoen5Bc6vZl5VXvT2E5yf2HBe5dqK
+j3D+1L1PZ8zJ+gDn77qvwbNG6R2cryzg4BQy7zWcv0mrI+vR4xdw/v2jGxXM
+zJ7B+U91phrt3/YYzhesW2mmx/gQztcxe6+z9PMdOL/Z5e2FnRXX4XzRkHUT
+IsUvIez7dpT/hMopOH/p7ae9L1v2wflaTL82Z0dvgfNjA2W23E5eAuev/5Kj
+/OLWFDjfklV/+YOnIXA+AC1/uUM=
+      "]], LineBox[CompressedData["
+1:eJxTTMoPSmViYGBQAWIQbcmqv/zB0xB7BjD4YH/tY9N8gR8RcP4Hf/VP+UVp
+cH71ZLdT2SYFcH5D1pqcy1pVcP5hhc72uQJNcP6J7+80Wdl74Pz0dK20bf8m
+wfk5dhM45L7OgfN3clVfPVS6GM4/uTneZWPnFjjf9BGjXGPEfjhf+cPun1aH
+TsL5notvnvWLuATnu/oKMX/deh3O74+/3mCw/Q6cf9xPljdA6CGc/1ZRtO7S
+rMdwfmmJdmK/2DM4//odgaC0Ey/g/IRKm+fsPq8R/tc27zrM+g7OV+Pc82KJ
+xwc4X3ZPtitrx0c4n+EX08qiR5/g/O+Be+OOqn6B82+bxEurtnyF8wvCBQSV
+7nyD8yWnPIlgkf0B56+LXrD8c8VPOD/ctt7jxN5fcP7GuFwlqz+/4fwfXM7M
+O0P/wvlBF63NZGf8g/MdODQn8Pn8h/P17MVe/f+P4AMAqI60lQ==
+      
+      "]]}, {}}, {{}, {}, {}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->True,
+  AxesLabel->{
+    FormBox["\"x-t\"", TraditionalForm], 
+    FormBox["\"\[Psi]\"", TraditionalForm]},
+  AxesOrigin->{0, 0},
+  PlotLabel->FormBox[
+    StyleBox[
+    "\"\[Psi](x,t)=Sign(x-t)\"", {Bold, Italic}, StripOnInput -> False], 
+    TraditionalForm],
+  PlotRange->{{-2, 2}, {-1., 1.}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{
+    Scaled[0.02], 
+    Scaled[0.02]}]], "Output",
+ CellChangeTimes->{
+  3.562647722822481*^9, 3.562990452662931*^9, {3.562990518470722*^9, 
+   3.5629905271076107`*^9}, {3.5629911025482817`*^9, 3.562991124633216*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "and this interactive plot lets you play with ",
+ StyleBox["k",
+  FontSlant->"Italic"],
+ " in Huber\[CloseCurlyQuote]s \[Psi] to see how it is actually something in \
+the middle."
+}], "Text",
+ CellChangeTimes->{{3.558382512320294*^9, 3.558382548372775*^9}, {
+   3.558382646982203*^9, 3.5583830689109163`*^9}, {3.558415308536336*^9, 
+   3.5584154636575737`*^9}, {3.5584155115693274`*^9, 
+   3.5584155441646338`*^9}, {3.5584157813046618`*^9, 3.558415938041029*^9}, {
+   3.5584159914795523`*^9, 3.5584160899377317`*^9}, {3.558416220710196*^9, 
+   3.5584163377584963`*^9}, 3.558639068027519*^9, 3.558684642249144*^9, 
+   3.5629904526630373`*^9, 3.5629905271078253`*^9, {3.5629911025483837`*^9, 
+   3.562991124633316*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"Piecewise", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"k", ",", 
+          RowBox[{"u", "\[GreaterEqual]", "k"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"u", ",", 
+          RowBox[{
+           RowBox[{"u", "\[GreaterEqual]", 
+            RowBox[{"-", "k"}]}], " ", "&&", " ", 
+           RowBox[{"u", " ", "<", "k"}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"-", "k"}], ",", 
+          RowBox[{"u", "<", 
+           RowBox[{"-", "k"}]}]}], "}"}]}], "}"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"u", ",", 
+       RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+     RowBox[{"AxesLabel", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<x-t\>\"", ",", "\"\<\[Psi]\>\""}], "}"}]}]}], "]"}], ",", 
+   
+   RowBox[{"{", 
+    RowBox[{"k", ",", "0", ",", "2"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.558160595908263*^9, 3.558160673673459*^9}, {
+   3.5582155443325872`*^9, 3.5582157149945593`*^9}, {3.558215808343713*^9, 
+   3.558215844296784*^9}, {3.558416427357254*^9, 3.558416429636126*^9}, {
+   3.558416509575036*^9, 3.558416510137981*^9}, {3.558626001958186*^9, 
+   3.558626045851974*^9}, 3.558638118381876*^9, {3.558638164903884*^9, 
+   3.558638165506051*^9}, 3.5586390680288973`*^9, 3.558684642249487*^9, {
+   3.558684721969727*^9, 3.5586847266498413`*^9}, {3.5626477342948847`*^9, 
+   3.562647748251853*^9}, 3.562990452663321*^9, 3.5629905271083612`*^9, {
+   3.562991102548663*^9, 3.5629911246335983`*^9}},
+ CellTags->"psi.cdf"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k$$ = 1., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`k$$], 0, 2}}, Typeset`size$$ = {360., {112., 116.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`k$6142$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`k$$ = 0}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`k$$, $CellContext`k$6142$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        Piecewise[{{$CellContext`k$$, $CellContext`u >= $CellContext`k$$}, \
+{$CellContext`u, 
+           
+           And[$CellContext`u >= -$CellContext`k$$, $CellContext`u < \
+$CellContext`k$$]}, {-$CellContext`k$$, $CellContext`u < \
+-$CellContext`k$$}}], {$CellContext`u, -2, 2}, 
+        AxesLabel -> {"x-t", "\[Psi]"}], 
+      "Specifications" :> {{$CellContext`k$$, 0, 2}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{403., {154., 160.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.56264775923814*^9, {3.562990454282855*^9, 3.562990527192028*^9}, {
+   3.562991102567093*^9, 3.562991133684569*^9}, 3.562991770234055*^9},
+ CellTags->"psi.cdf"]
+}, Open  ]],
+
+Cell["\<\
+Recaping: mean and median may be seen as an special case of the more general\
+\>", "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+   3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+   3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+   3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+   3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+   3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+   3.558627119526367*^9}, {3.55862715397468*^9, 3.55862721588531*^9}, {
+   3.558638468296975*^9, 3.558638473789789*^9}, 3.558639068551258*^9, 
+   3.558684643070053*^9, 3.562990454282979*^9, 3.562990527192156*^9, {
+   3.562991102567206*^9, 3.562991124702083*^9}}],
+
+Cell[TextData[{
+ "\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    SubscriptBox["argmin", "t"], 
+    RowBox[{"\[Integral]", 
+     RowBox[{
+      RowBox[{"\[Phi]", "(", 
+       RowBox[{"X", ",", "t"}], ")"}], 
+      StyleBox["dX",
+       FontSlant->"Italic"]}]}]}], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+  3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+  3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+  3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+  3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+  3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+  3.558627119526367*^9}, {3.55862715397468*^9, 3.558627268678938*^9}, {
+  3.5586273911110697`*^9, 3.558627397138261*^9}, {3.558639068611588*^9, 
+  3.558639068612912*^9}, {3.558684643070223*^9, 3.5586846430711803`*^9}, {
+  3.562990454283182*^9, 3.562990454284032*^9}, {3.5629905271923447`*^9, 
+  3.562990527193162*^9}, {3.5629911025673923`*^9, 3.562991124703147*^9}}],
+
+Cell["which can be recasted - if we can use calculus - as", "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+   3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+   3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+   3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+   3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+   3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+   3.558627119526367*^9}, {3.55862715397468*^9, 3.5586273058377953`*^9}, {
+   3.5586385645621357`*^9, 3.558638570693468*^9}, 3.558639068613449*^9, 
+   3.55868464307125*^9, 3.562990454284107*^9, 3.562990527193232*^9, {
+   3.5629911025682487`*^9, 3.562991124703217*^9}}],
+
+Cell[TextData[{
+ "\t",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"solve", " ", "for", " ", "t"}], ",", 
+    RowBox[{
+     RowBox[{"\[Integral]", 
+      RowBox[{
+       RowBox[{"\[Psi]", "(", 
+        RowBox[{"X", ",", "t"}], ")"}], "dX"}]}], " ", "=", " ", "0"}]}], 
+   TraditionalForm]]],
+ ", where \[Psi]",
+ StyleBox["(x,t)",
+  FontSlant->"Italic"],
+ " = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    FractionBox["\[DifferentialD]", 
+     RowBox[{"\[DifferentialD]", "t"}]], 
+    RowBox[{"\[Phi]", "(", 
+     RowBox[{"x", ",", "t"}], ")"}]}], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+  3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+  3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+  3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+  3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+  3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+  3.558627119526367*^9}, {3.55862715397468*^9, 3.5586273722290382`*^9}, {
+  3.558627403749284*^9, 3.558627442136533*^9}, {3.558639068614479*^9, 
+  3.558639068661311*^9}, {3.5586846430713673`*^9, 3.5586846430726023`*^9}, {
+  3.562990454284233*^9, 3.562990454285396*^9}, {3.5629905271933517`*^9, 
+  3.562990527194518*^9}, {3.562991102568372*^9, 3.562991124704574*^9}}],
+
+Cell[TextData[{
+ "which, in turn, becomes for a particular sample ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"{", 
+    SubscriptBox["X", "i"], "}"}], TraditionalForm]]],
+ " the statistic ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "n"], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+  3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+  3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+  3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+  3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+  3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+  3.558627119526367*^9}, {3.55862715397468*^9, 3.5586273722290382`*^9}, {
+  3.558627403749284*^9, 3.558627503669682*^9}, {3.5586279138550797`*^9, 
+  3.558627928267465*^9}, {3.5586390686623363`*^9, 3.558639068662759*^9}, {
+  3.5586532704896812`*^9, 3.558653283163834*^9}, {3.558684643072712*^9, 
+  3.5586846430741167`*^9}, {3.5629904542855053`*^9, 3.5629904542865353`*^9}, {
+  3.562990527194628*^9, 3.562990527195669*^9}, {3.5629911025696297`*^9, 
+  3.562991124705801*^9}}],
+
+Cell[TextData[{
+ "\t",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "n"], TraditionalForm]]],
+ " =",
+ StyleBox[" ",
+  FontSize->10],
+ Cell[BoxData[
+  FormBox[
+   RowBox[{
+    RowBox[{"solve", " ", "for", " ", "t"}], ",", 
+    RowBox[{
+     RowBox[{
+      FractionBox["1", "n"], 
+      RowBox[{
+       UnderoverscriptBox["\[Sum]", 
+        RowBox[{"i", "=", "1"}], "n"], 
+       RowBox[{"\[Psi]", "(", 
+        RowBox[{
+         SubscriptBox["X", "i"], ",", "t"}], ")"}]}]}], " ", "=", " ", 
+     "0"}]}], TraditionalForm]]]
+}], "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+  3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+  3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+  3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+  3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+  3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+  3.558627119526367*^9}, {3.55862715397468*^9, 3.5586273722290382`*^9}, {
+  3.558627403749284*^9, 3.558627442136533*^9}, {3.5586275156409273`*^9, 
+  3.558627599193226*^9}, {3.558627721943014*^9, 3.5586277348151073`*^9}, {
+  3.558639068663862*^9, 3.5586390686651917`*^9}, {3.558684643074245*^9, 
+  3.558684643075513*^9}, {3.5629904542866383`*^9, 3.562990454287768*^9}, {
+  3.562990527195766*^9, 3.562990527196888*^9}, {3.562991102570752*^9, 
+  3.562991124707026*^9}}],
+
+Cell["\<\
+although you would iterate that (somehow) to have a better approximation.\
+\>", "Text",
+ CellChangeTimes->{{3.5584173082346573`*^9, 3.55841733279338*^9}, {
+   3.558486270417132*^9, 3.558486314902257*^9}, {3.558486378767448*^9, 
+   3.558486732495413*^9}, {3.558486768016881*^9, 3.558487300880945*^9}, {
+   3.558623754725546*^9, 3.558623917059497*^9}, {3.558625642819532*^9, 
+   3.5586257828171062`*^9}, {3.5586260776992283`*^9, 3.558626145534966*^9}, {
+   3.558626264633205*^9, 3.558626407645585*^9}, {3.558626976912921*^9, 
+   3.558627119526367*^9}, {3.55862715397468*^9, 3.5586273722290382`*^9}, {
+   3.558627403749284*^9, 3.558627442136533*^9}, {3.5586275156409273`*^9, 
+   3.558627675158574*^9}, {3.558638582304434*^9, 3.558638583965053*^9}, 
+   3.558639068665522*^9, 3.558684643075574*^9, 3.562990454287826*^9, 
+   3.562990527196948*^9, {3.5629911025718946`*^9, 3.562991124707088*^9}}],
+
+Cell[TextData[{
+ "One would impose certain conditions on \[Psi] (or \[Phi]), so the statistic \
+",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["T", "n"], TraditionalForm]]],
+ " behaves properly; but I would leave it to the reader to think about what \
+conditions would be appropriate for \[Psi] (or \[Phi])."
+}], "Text",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQBWIQHdDUXqzS/MoxLnlmGYhWjTwr7wakve7HqILo930R
+uiA651Z/JFi8iyEORG8xmLMARK8xD3fsBNJpzxeGgujZllG6XUB6j+otOxAt
+krAtGUQXyhnmgGhzZ5FqEL1oxZceEL3MTPYKiGa48eEpiJ5iYP8KRHuEtLN2
+A2mlX+WcILoqzoUPTDeViIPouCnd6iA64IGeDohWvsniCKIXuUb4gei2lYfA
+dCQnfzOIljmj0QqiV6yzKZ0ApCVD3SpAdEjA1N0gel4ohH6QnfRnGZA2KIbQ
+/WYn8+52v3LMs4XQ2n7PykH0uVAIPc/30n4Q3bRi2iEQDQD77arA
+  "]]
+}, Open  ]]
+},
+WindowSize->{740, 689},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+CellLabelAutoDelete->True,
+ShowCellTags->True,
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (October 5, \
+2011)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "psi.cdf"->{
+  Cell[10653, 271, 1641, 40, 55, "Input",
+   CellTags->"psi.cdf"],
+  Cell[12297, 313, 1930, 41, 343, "Output",
+   CellTags->"psi.cdf"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"psi.cdf", 22897, 553}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 295, 4, 76, "Title"],
+Cell[877, 28, 440, 7, 26, "Text"],
+Cell[1320, 37, 697, 16, 28, "Text"],
+Cell[2020, 55, 350, 6, 26, "Text"],
+Cell[2373, 63, 687, 16, 32, "Text"],
+Cell[3063, 81, 1164, 25, 56, "Text"],
+Cell[4230, 108, 891, 25, 37, "Text"],
+Cell[5124, 135, 848, 23, 37, "Text"],
+Cell[5975, 160, 1326, 27, 74, "Text"],
+Cell[CellGroupData[{
+Cell[7326, 191, 876, 19, 43, "Input"],
+Cell[8205, 212, 1674, 38, 255, "Output"]
+}, Open  ]],
+Cell[9894, 253, 734, 14, 26, "Text"],
+Cell[CellGroupData[{
+Cell[10653, 271, 1641, 40, 55, "Input",
+ CellTags->"psi.cdf"],
+Cell[12297, 313, 1930, 41, 343, "Output",
+ CellTags->"psi.cdf"]
+}, Open  ]],
+Cell[14242, 357, 799, 12, 26, "Text"],
+Cell[15044, 371, 1091, 23, 32, "Text"],
+Cell[16138, 396, 772, 10, 26, "Text"],
+Cell[16913, 408, 1380, 34, 38, "Text"],
+Cell[18296, 444, 1174, 23, 26, "Text"],
+Cell[19473, 469, 1435, 35, 37, "Text"],
+Cell[20911, 506, 899, 13, 26, "Text"],
+Cell[21813, 521, 719, 16, 41, "Text"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
