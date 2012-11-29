@@ -1,7 +1,7 @@
-%div
+%div{:class => "clearfix"}
   - if !a_post.image.nil?
-    %a{:href => post_path(a_post.year, a_post.title,''), :style => 'float:right;'}
-      %img{:src => post_path(a_post.year, a_post.title, a_post.image), :height => 150}
+    %a{:href => post_path(a_post.year, a_post.title,''), :style => 'float:right;margin-left:5px;'}
+      %img{:src => post_path(a_post.year, a_post.title, a_post.image), :height => 150, :style => ""}
   %h3= a_post.title
   - if !a_post.description.nil?
     %p.Text
@@ -9,5 +9,5 @@
       \...
   %i= Time.at(a_post.path_mtime).asctime
   &nbsp;
-  %a{:href => post_path(a_post.year, a_post.title,'')} more&gt;
+  %a{:href => post_path(a_post.year, a_post.title,'')} read more&gt;
   %a{:href => post_url(a_post.year,a_post.title,'') + "#disqus_thread"} -
