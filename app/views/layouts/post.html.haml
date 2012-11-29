@@ -40,6 +40,9 @@
       .content
         .row
           .span9
+
+            %span{:style => 'float:right'}= Time.at(post.created_at).asctime
+
             = yield
 
             #disqus_thread

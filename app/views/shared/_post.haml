@@ -7,7 +7,7 @@
     %p.Text
       = a_post.description
       \...
-  %i= Time.at(a_post.path_mtime).asctime
+  %i= Time.at(a_post.created_at).asctime
   &nbsp;
   %a{:href => post_path(a_post.year, a_post.title,'')} read more&gt;
   %a{:href => post_url(a_post.year,a_post.title,'') + "#disqus_thread"} -

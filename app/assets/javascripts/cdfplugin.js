@@ -64,7 +64,10 @@ cdfplugin = cdf_plugin = function() {
               embedExtras += prop + "='" + params[prop] + "' ";
             }
 
-            return '<object classid="clsid:612AB921-E294-41AA-8E98-87E7E057EF33" width="' + width + '" height="' + height + '" type="application/vnd.wolfram.mathematica"><param name="src" value="' + src + '">' + paramTags + '<embed width="' + width + '" height="' + height + '" src="' + src + '" type="application/vnd.wolfram.mathematica" ' + embedExtras + ' /></object>';
+            return '<p><object classid="clsid:612AB921-E294-41AA-8E98-87E7E057EF33" width="' + width + '" height="' + height 
+                   + '" type="application/vnd.wolfram.mathematica"><param name="src" value="' + src + '">' + paramTags
+                   + '<embed width="' + width + '" height="' + height + '" src="' + src + '" type="application/vnd.wolfram.mathematica" '
+                   + embedExtras + ' /></object>' + '<br/>(Having issues? You still can <a href="' + src + '?download=true">download cdf</a>)</p>';
         },
         
         setDefaultContent: function(html) {

@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       157,          7]
-NotebookDataLength[     23323,        496]
-NotebookOptionsPosition[     22954,        478]
-NotebookOutlinePosition[     23310,        494]
-CellTagsIndexPosition[     23267,        491]
+NotebookDataLength[     24999,        544]
+NotebookOptionsPosition[     24362,        514]
+NotebookOutlinePosition[     24815,        536]
+CellTagsIndexPosition[     24749,        531]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -134,43 +134,30 @@ Cell[BoxData[
          "]"}]}], ";", "\[IndentingNewLine]", 
        RowBox[{
         RowBox[{"exportHTML", "[", "nb_", "]"}], " ", ":=", " ", 
-        RowBox[{"Module", "[", 
+        RowBox[{"(", "\[IndentingNewLine]", 
          RowBox[{
-          RowBox[{"{", "\[IndentingNewLine]", 
-           RowBox[{"rules", " ", "=", " ", 
-            RowBox[{"{", "\[IndentingNewLine]", 
-             RowBox[{"\"\<Input\>\"", " ", "\[Rule]", " ", 
-              RowBox[{"{", "\[IndentingNewLine]", 
-               RowBox[{
-               "\"\<\\n<pre class=\\\"code\\\">\\n\>\"", ",", 
-                "\[IndentingNewLine]", 
+          RowBox[{"Message", "[", 
+           RowBox[{
+            RowBox[{"exportHTML", "::", "info"}], ",", 
+            RowBox[{"FileNameTake", "[", "htmlName", "]"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Export", "[", "\[IndentingNewLine]", 
+           RowBox[{
+           "htmlName", ",", "\[IndentingNewLine]", "nb", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"\"\<ConversionRules\>\"", " ", "\[Rule]", " ", 
+             RowBox[{"{", 
+              RowBox[{"\"\<Input\>\"", " ", "\[Rule]", " ", 
+               RowBox[{"{", 
                 RowBox[{
-                 RowBox[{"DisplayForm", "[", "#", "]"}], "&"}], ",", 
-                "\[IndentingNewLine]", "\"\<\\n</pre>\\n\>\""}], 
-               "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", "}"}]}],
-            "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
-          RowBox[{
-           RowBox[{"Message", "[", 
-            RowBox[{
-             RowBox[{"exportHTML", "::", "info"}], ",", 
-             RowBox[{"FileNameTake", "[", "htmlName", "]"}]}], "]"}], ";", 
-           "\[IndentingNewLine]", 
-           RowBox[{"Export", "[", "\[IndentingNewLine]", 
-            RowBox[{
-            "htmlName", ",", "\[IndentingNewLine]", "nb", ",", 
-             "\[IndentingNewLine]", "\"\<HTML\>\"", ",", 
-             "\[IndentingNewLine]", 
-             RowBox[{"\"\<CSS\>\"", " ", "\[Rule]", " ", "None"}], ",", 
-             "\[IndentingNewLine]", 
-             RowBox[{"\"\<MathOutput\>\"", "\[Rule]", "\"\<GIF\>\""}], ",", 
-             "\[IndentingNewLine]", 
-             RowBox[{"\"\<ConvertReverseClosed\>\"", "\[Rule]", "True"}], ",",
-              "\[IndentingNewLine]", 
-             RowBox[{"\"\<ConversionRules\>\"", "\[Rule]", "rules"}]}], 
-            "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
-           RowBox[{"Message", "[", 
-            RowBox[{"exportHTML", "::", "done"}], "]"}], ";"}]}], 
-         "\[IndentingNewLine]", "]"}]}], ";", " ", 
+                 RowBox[{"ToString", "[", 
+                  RowBox[{"#", " ", "/.", " ", 
+                   RowBox[{"RowBox", " ", "\[Rule]", " ", "StringJoin"}]}], 
+                  "]"}], "&"}], "}"}]}], "}"}]}]}], "\[IndentingNewLine]", 
+           "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Message", "[", 
+           RowBox[{"exportHTML", "::", "done"}], "]"}], ";"}], 
+         "\[IndentingNewLine]", ")"}]}], ";", " ", 
        RowBox[{"(*", " ", 
         RowBox[{
          RowBox[{"yet", " ", "to", " ", "be", " ", "done"}], ",", " ", 
@@ -226,7 +213,26 @@ Cell[BoxData[
    3.562959582983384*^9}, {3.562959623630591*^9, 3.5629596714775352`*^9}, {
    3.562959705334723*^9, 3.562959719422063*^9}, {3.562959809643093*^9, 
    3.562959817662595*^9}, {3.562990407524557*^9, 3.5629904300165997`*^9}, {
-   3.5629910322128267`*^9, 3.562991067565672*^9}}],
+   3.5629910322128267`*^9, 3.562991067565672*^9}, {3.5629928444608383`*^9, 
+   3.562992860288539*^9}, {3.562992969974526*^9, 3.562992971487376*^9}, {
+   3.563079919563188*^9, 3.563079929275342*^9}, {3.56308005903498*^9, 
+   3.5630801143936577`*^9}, 3.5630811440602703`*^9, {3.563081260395768*^9, 
+   3.5630812650578814`*^9}, {3.563087273912754*^9, 3.563087274906863*^9}, {
+   3.563087371475078*^9, 3.5630873764048986`*^9}, {3.5630876599060717`*^9, 
+   3.5630876625113993`*^9}, {3.563087742108089*^9, 3.563087766603829*^9}, {
+   3.563087869224547*^9, 3.563087888020999*^9}, 3.5630880061925077`*^9, {
+   3.5631301142175827`*^9, 3.563130141809376*^9}, {3.5631305935102587`*^9, 
+   3.56313059690169*^9}, {3.5631306710801563`*^9, 3.5631306741528063`*^9}, {
+   3.56313079776687*^9, 3.563130803109462*^9}, {3.5631309275134478`*^9, 
+   3.563130953431424*^9}, {3.5631310156574793`*^9, 3.563131028663925*^9}, {
+   3.563131115830793*^9, 3.56313113119573*^9}, {3.56313118036747*^9, 
+   3.563131209182487*^9}, {3.563131246533145*^9, 3.563131253261394*^9}, {
+   3.5631313007173777`*^9, 3.563131307781096*^9}, {3.563131374471902*^9, 
+   3.5631313787257767`*^9}, {3.563131451118939*^9, 3.563131477493847*^9}, {
+   3.563131541298256*^9, 3.563131555398357*^9}, {3.563131698297279*^9, 
+   3.5631317018473682`*^9}, {3.563131747082838*^9, 3.56313176776322*^9}, {
+   3.563131811546631*^9, 3.5631318352205276`*^9}, {3.563131942651066*^9, 
+   3.563131985341406*^9}, 3.563132050090131*^9}],
 
 Cell[BoxData[
  InterpretationBox[
@@ -292,18 +298,14 @@ $CellContext`generateCDFs, $CellContext`exportHTML}, $CellContext`generateCDF[
                     NotebookFind[$CellContext`nb, "Input", Next, CellStyle]]; 
                     Null]; Null]; $CellContext`exportHTML[
                     Pattern[$CellContext`nb, 
-                    Blank[]]] := 
-                    Module[{$CellContext`rules = {
-                    "Input" -> {
-                    "\n<pre class=\"code\">\n", DisplayForm[#]& , 
-                    "\n</pre>\n"}}}, Message[
+                    Blank[]]] := (Message[
                     MessageName[$CellContext`exportHTML, "info"], 
                     FileNameTake[$CellContext`htmlName]]; 
-                    Export[$CellContext`htmlName, $CellContext`nb, "HTML", 
-                    "CSS" -> None, "MathOutput" -> "GIF", 
-                    "ConvertReverseClosed" -> True, 
-                    "ConversionRules" -> $CellContext`rules]; Message[
-                    MessageName[$CellContext`exportHTML, "done"]]; Null]; 
+                    Export[$CellContext`htmlName, $CellContext`nb, 
+                    "ConversionRules" -> {"Input" -> {ToString[
+                    ReplaceAll[#, RowBox -> StringJoin], FormatType -> 
+                    OutputForm]& }}]; Message[
+                    MessageName[$CellContext`exportHTML, "done"]]; Null); 
                    MessageName[$CellContext`exportHTML, "info"] = 
                     "Generating HTML `1`"; 
                    MessageName[$CellContext`exportHTML, "done"] = 
@@ -374,17 +376,14 @@ $CellContext`generateCDFs, $CellContext`exportHTML}, $CellContext`generateCDF[
                     NotebookFind[$CellContext`nb, "Input", Next, CellStyle]]; 
                    Null]; Null]; $CellContext`exportHTML[
                  Pattern[$CellContext`nb, 
-                  Blank[]]] := 
-               Module[{$CellContext`rules = {
-                   "Input" -> {
-                    "\n<pre class=\"code\">\n", DisplayForm[#]& , 
-                    "\n</pre>\n"}}}, Message[
-                   MessageName[$CellContext`exportHTML, "info"], 
-                   FileNameTake[$CellContext`htmlName]]; 
-                 Export[$CellContext`htmlName, $CellContext`nb, "HTML", "CSS" -> 
-                   None, "MathOutput" -> "GIF", "ConvertReverseClosed" -> 
-                   True, "ConversionRules" -> $CellContext`rules]; Message[
-                   MessageName[$CellContext`exportHTML, "done"]]; Null]; 
+                  Blank[]]] := (Message[
+                  MessageName[$CellContext`exportHTML, "info"], 
+                  FileNameTake[$CellContext`htmlName]]; 
+                Export[$CellContext`htmlName, $CellContext`nb, 
+                  "ConversionRules" -> {"Input" -> {ToString[
+                    ReplaceAll[#, RowBox -> StringJoin], FormatType -> 
+                    OutputForm]& }}]; Message[
+                  MessageName[$CellContext`exportHTML, "done"]]; Null); 
               MessageName[$CellContext`exportHTML, "info"] = 
                "Generating HTML `1`"; 
               MessageName[$CellContext`exportHTML, "done"] = 
@@ -448,32 +447,69 @@ $CellContext`exportHTML}, $CellContext`generateCDF[
              NotebookFind[$CellContext`nb, "Input", Next, CellStyle]]; Null]; 
         Null]; $CellContext`exportHTML[
         Pattern[$CellContext`nb, 
-         Blank[]]] := 
-      Module[{$CellContext`rules = {
-          "Input" -> {
-            "\n<pre class=\"code\">\n", DisplayForm[#]& , "\n</pre>\n"}}}, 
-        Message[
-          MessageName[$CellContext`exportHTML, "info"], 
-          FileNameTake[$CellContext`htmlName]]; 
-        Export[$CellContext`htmlName, $CellContext`nb, "HTML", "CSS" -> None, 
-          "MathOutput" -> "GIF", "ConvertReverseClosed" -> True, 
-          "ConversionRules" -> $CellContext`rules]; Message[
-          MessageName[$CellContext`exportHTML, "done"]]; Null]; 
+         Blank[]]] := (Message[
+         MessageName[$CellContext`exportHTML, "info"], 
+         FileNameTake[$CellContext`htmlName]]; 
+       Export[$CellContext`htmlName, $CellContext`nb, 
+         "ConversionRules" -> {"Input" -> {ToString[
+              ReplaceAll[#, RowBox -> StringJoin], FormatType -> 
+              OutputForm]& }}]; Message[
+         MessageName[$CellContext`exportHTML, "done"]]; Null); 
      MessageName[$CellContext`exportHTML, "info"] = "Generating HTML `1`"; 
      MessageName[$CellContext`exportHTML, "done"] = 
       "Export to HTML done"; $CellContext`generateCDFs[$CellContext`nb]; \
 $CellContext`exportHTML[$CellContext`nb]; Null], Appearance -> 
     "Palette"]]]], "Output",
+ CellChangeTimes->{3.563131836023601*^9, 3.563131996209076*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"Plot", "[", 
+  RowBox[{
+   RowBox[{"Sign", "[", "u", "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"u", ",", 
+     RowBox[{"-", "2"}], ",", "2"}], "}"}], ",", 
+   RowBox[{"AxesLabel", "\[Rule]", 
+    RowBox[{"{", 
+     RowBox[{"\"\<x-t\>\"", ",", "\"\<\[Psi]\>\""}], "}"}]}], ",", 
+   RowBox[{"PlotLabel", "\[Rule]", 
+    RowBox[{"Style", "[", 
+     RowBox[{"\"\<\[Psi](x,t)=Sign(x-t)\>\"", ",", 
+      RowBox[{"{", 
+       RowBox[{"Bold", ",", "Italic"}], "}"}]}], "]"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.558160595908263*^9, 3.558160673673459*^9}, {
+   3.558160704620648*^9, 3.5581607086185207`*^9}, {3.5584161049255333`*^9, 
+   3.558416147046587*^9}, 3.558639068019863*^9, 3.5586846422418337`*^9, {
+   3.5626477153810453`*^9, 3.56264772097754*^9}, 3.5629904526585207`*^9, 
+   3.562990527100678*^9, {3.562991102544751*^9, 3.562991124629685*^9}, 
+   3.5630809800114317`*^9, 3.563081164106977*^9, 3.563081285350298*^9, 
+   3.5630813967090816`*^9},
+ CellTags->"tag"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"c", " ", "=", " ", 
+  RowBox[{"With", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"enb", " ", "=", " ", 
+      RowBox[{"EvaluationNotebook", "[", "]"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"NotebookFind", "[", 
+      RowBox[{"enb", ",", "\"\<tag\>\"", ",", "CellTags"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"NotebookRead", "[", "enb", "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.563132484812611*^9, 3.56313263276015*^9}, {
+  3.563132756295977*^9, 3.563132785950691*^9}, {3.563132888216901*^9, 
+  3.563132926567031*^9}}],
+
+Cell[BoxData["\<\"tag\"\>"], "Output",
  CellChangeTimes->{
-  3.5626491624214487`*^9, 3.562649787024981*^9, 3.562700805028737*^9, 
-   3.562701131427362*^9, 3.562703379317275*^9, 3.562904284548514*^9, 
-   3.562904346673416*^9, 3.562904391548118*^9, 3.5629052169844007`*^9, 
-   3.5629126794101057`*^9, 3.562912726661677*^9, 3.5629128978838778`*^9, 
-   3.56291297648969*^9, 3.562913098504277*^9, 3.562913152308462*^9, 
-   3.562913227580339*^9, 3.56291352539714*^9, 3.562913648267385*^9, 
-   3.562957906644495*^9, 3.562958044968223*^9, {3.562959755787243*^9, 
-   3.5629597599745207`*^9}, 3.562959820663569*^9, 3.562990444539384*^9, {
-   3.562991073037426*^9, 3.562991087827465*^9}}]
+  3.563132511859704*^9, 3.5631325918926687`*^9, 3.5631326342465563`*^9, {
+   3.563132889752564*^9, 3.56313293774819*^9}}]
 }, Open  ]]
 },
 WindowSize->{740, 689},
@@ -486,17 +522,29 @@ StyleDefinitions->"Default.nb"
 
 (* Internal cache information *)
 (*CellTagsOutline
-CellTagsIndex->{}
+CellTagsIndex->{
+ "tag"->{
+  Cell[22536, 465, 994, 22, 43, "Input",
+   CellTags->"tag"]}
+ }
 *)
 (*CellTagsIndex
-CellTagsIndex->{}
+CellTagsIndex->{
+ {"tag", 24663, 525}
+ }
 *)
 (*NotebookFileOutline
 Notebook[{
 Cell[557, 20, 179, 4, 26, "Text"],
 Cell[CellGroupData[{
-Cell[761, 28, 10349, 200, 898, "Input"],
-Cell[11113, 230, 11825, 245, 73, "Output"]
+Cell[761, 28, 11014, 206, 718, "Input"],
+Cell[11778, 236, 10743, 226, 73, "Output"]
+}, Open  ]],
+Cell[22536, 465, 994, 22, 43, "Input",
+ CellTags->"tag"],
+Cell[CellGroupData[{
+Cell[23555, 491, 608, 15, 58, "Input"],
+Cell[24166, 508, 180, 3, 27, "Output"]
 }, Open  ]]
 }
 ]

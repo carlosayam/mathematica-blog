@@ -78,7 +78,12 @@ class PostsController < ApplicationController
     mime_type = Mime::Type.lookup_by_extension(extname)
     content_type = mime_type.to_s unless mime_type.nil?
     self.response.headers['Content-Type'] = content_type
-    self.response.headers['Content-Disposition'] = 'inline'
+    if !params[:download].nil?
+      self.response.headers['Content-Disposition'] = 'attachment; filename=' + File.basename(file_path)
+    else
+      self.response.headers['Content-Disposition'] = 'inline'
+    end
+    ## ToDo: improve file/resource caching
     self.response.headers['Last-Modified'] = Time.now.ctime.to_s
     self.response_body = Streamer.new(file_path)
   end
